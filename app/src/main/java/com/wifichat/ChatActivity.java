@@ -67,19 +67,15 @@ public class ChatActivity extends AppCompatActivity implements WifiP2pManager.Pe
 
                     @Override
                     public void onSuccess() {
-                        // Code for when the discovery initiation is successful goes here.
-                        // No services have actually been discovered yet, so this method
-                        // can often be left blank.  Code for peer discovery goes in the
-                        // onReceive method, detailed below.
-                        Toast.makeText(ChatActivity.this,"Success",Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(ChatActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onFailure(int reasonCode) {
-                        Toast.makeText(ChatActivity.this,"Failed due to "+String.valueOf(reasonCode),Toast.LENGTH_SHORT).show();
-                        // Code for when the discovery initiation fails goes here.
-                        // Alert the user that something went wrong.
+                        Toast.makeText(ChatActivity.this, "Failed due to " + String.valueOf(reasonCode), Toast.LENGTH_SHORT).show();
+
                     }
                 });
             }
@@ -95,19 +91,15 @@ public class ChatActivity extends AppCompatActivity implements WifiP2pManager.Pe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_chat, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -130,21 +122,15 @@ public class ChatActivity extends AppCompatActivity implements WifiP2pManager.Pe
     @Override
     public void onPeersAvailable(WifiP2pDeviceList wifiP2pDeviceList) {
 
-        Log.d("ChatActivity","Peers Avaiable");
         Collection<WifiP2pDevice> refreshedPeers = wifiP2pDeviceList.getDeviceList();
         if (!refreshedPeers.equals(peers)) {
             emptyView.setVisibility(View.GONE);
             peers.clear();
             peers.addAll(refreshedPeers);
 
-            // If an AdapterView is backed by this data, notify it
-            // of the change.  For instance, if you have a ListView of
-            // available peers, trigger an update.
-            devicesListAdapter = new DevicesListAdapter(peers,this,mManager,mChannel);
+            devicesListAdapter = new DevicesListAdapter(peers, this, mManager, mChannel);
             recyclerView.setAdapter(devicesListAdapter);
 
-            // Perform any other updates needed based on the new list of
-            // peers connected to the Wi-Fi P2P network.
         }
 
         if (peers.size() == 0) {

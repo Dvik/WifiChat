@@ -19,7 +19,7 @@ public class MessagesProvider extends ContentProvider {
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = MessagesContract.CONTENT_AUTHORITY;
-        matcher.addURI(authority, MessagesContract.SituationEntry.TABLE_SITUATIONS, SITUATIONS);
+        matcher.addURI(authority, MessagesContract.SituationEntry.TABLE_MESSAGES, SITUATIONS);
         return matcher;
     }
 
@@ -50,7 +50,7 @@ public class MessagesProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case SITUATIONS: {
                 retCursor = mOpenHelper.getReadableDatabase().query(
-                        MessagesContract.SituationEntry.TABLE_SITUATIONS,
+                        MessagesContract.SituationEntry.TABLE_MESSAGES,
                         projection,
                         selection,
                         selectionArgs,
@@ -72,7 +72,7 @@ public class MessagesProvider extends ContentProvider {
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         Uri returnUri;
 
-        long _id = db.insert(MessagesContract.SituationEntry.TABLE_SITUATIONS, null, values);
+        long _id = db.insert(MessagesContract.SituationEntry.TABLE_MESSAGES, null, values);
 
         if (_id > 0) {
             returnUri = MessagesContract.SituationEntry.buildFavoritesUri(_id);
@@ -91,7 +91,7 @@ public class MessagesProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         int numDeleted;
         numDeleted = db.delete(
-                MessagesContract.SituationEntry.TABLE_SITUATIONS, selection, selectionArgs);
+                MessagesContract.SituationEntry.TABLE_MESSAGES, selection, selectionArgs);
 
         return numDeleted;
     }
@@ -110,7 +110,7 @@ public class MessagesProvider extends ContentProvider {
                 }
                 long _id = -1;
                 try {
-                    _id = db.insertOrThrow(MessagesContract.SituationEntry.TABLE_SITUATIONS,
+                    _id = db.insertOrThrow(MessagesContract.SituationEntry.TABLE_MESSAGES,
                             null, value);
                 } catch (SQLiteConstraintException e) {
                 }
@@ -142,7 +142,7 @@ public class MessagesProvider extends ContentProvider {
         }
 
 
-        numUpdated = db.update(MessagesContract.SituationEntry.TABLE_SITUATIONS,
+        numUpdated = db.update(MessagesContract.SituationEntry.TABLE_MESSAGES,
                 contentValues,
                 selection,
                 selectionArgs);

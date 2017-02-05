@@ -11,8 +11,8 @@ import android.widget.ImageButton;
 
 public class ChatMessagesActivity extends AppCompatActivity {
 
-    EditText chatMessage;
-    ImageButton chatSend;
+    private EditText chatMessage;
+    private ImageButton chatSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,7 @@ public class ChatMessagesActivity extends AppCompatActivity {
         initViews();
     }
 
-    private void initViews()
-    {
+    private void initViews() {
         chatMessage = (EditText) findViewById(R.id.chat_message);
         chatSend = (ImageButton) findViewById(R.id.chat_send);
     }
