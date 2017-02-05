@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WifiChat</string>
+    <string name="action_settings">Settings</string>
+</resources>
