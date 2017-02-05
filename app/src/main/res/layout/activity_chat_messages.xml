@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wifichat.ChatActivity">
+    tools:context="com.wifichat.ChatMessagesActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,14 +20,31 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_chat" />
+    <include layout="@layout/content_chat_messages" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_signal_wifi_2_bar_black_24dp" />
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/fab_margin">
+
+        <EditText
+            android:id="@+id/chat_message"
+            android:layout_width="match_parent"
+            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@null"
+            android:padding="10dp"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id = "@+id/chat_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_send_black_24dp" />
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
