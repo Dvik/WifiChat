@@ -1,6 +1,8 @@
 package com.wifichat.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pManager;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wifichat.ChatMessagesActivity;
 import com.wifichat.R;
 
 import java.util.List;
@@ -64,7 +67,7 @@ public class DevicesListAdapter extends RecyclerView.Adapter<DevicesListAdapter.
             @Override
             public void onClick(View view) {
                 WifiP2pDevice device;
-                WifiP2pConfig config = new WifiP2pConfig();
+                final WifiP2pConfig config = new WifiP2pConfig();
                 config.deviceAddress = permsList.get(position).deviceAddress;
                 mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
 
@@ -72,6 +75,9 @@ public class DevicesListAdapter extends RecyclerView.Adapter<DevicesListAdapter.
                     public void onSuccess() {
                         //success logic
                         Toast.makeText(context, "Connected", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent((Activity) context, ChatMessagesActivity.class);
+                        intent.putExtra("device",permsList.get(position));
+                        ((Activity) context).startActivity(intent);
                     }
 
                     @Override

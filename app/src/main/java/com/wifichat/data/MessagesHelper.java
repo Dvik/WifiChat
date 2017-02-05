@@ -23,12 +23,13 @@ public class MessagesHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         final String SQL_CREATE_MESSAGES_TABLE = "CREATE TABLE " +
-                MessagesContract.SituationEntry.TABLE_MESSAGES + "(" +
-                MessagesContract.SituationEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
-                MessagesContract.SituationEntry.COLUMN_MESSAGE + " TEXT NOT NULL, " +
-                MessagesContract.SituationEntry.COLUMN_SENDER + " TEXT NOT NULL, " +
-                MessagesContract.SituationEntry.COLUMN_RECEIVER + " TEXT NOT NULL, " +
-                MessagesContract.SituationEntry.COLUMN_STATUS + " TEXT NOT NULL);";
+                MessagesContract.MessagesEntry.TABLE_MESSAGES + "(" +
+                MessagesContract.MessagesEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
+                MessagesContract.MessagesEntry.COLUMN_MESSAGE + " TEXT NOT NULL, " +
+                MessagesContract.MessagesEntry.COLUMN_SENDER + " TEXT NOT NULL, " +
+                MessagesContract.MessagesEntry.COLUMN_RECEIVER + " TEXT NOT NULL, " +
+                MessagesContract.MessagesEntry.COLUMN_TIME + " TEXT NOT NULL, " +
+                MessagesContract.MessagesEntry.COLUMN_STATUS + " TEXT NOT NULL);";
 
         sqLiteDatabase.execSQL(SQL_CREATE_MESSAGES_TABLE);
 

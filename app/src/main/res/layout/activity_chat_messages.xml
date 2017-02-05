@@ -26,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="@drawable/back_chat_send"
         android:layout_margin="@dimen/fab_margin">
 
         <EditText
@@ -37,12 +38,14 @@
             android:padding="10dp"
             android:layout_height="wrap_content" />
 
-        <ImageButton
+        <ImageView
             android:id = "@+id/chat_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
             app:srcCompat="@drawable/ic_send_black_24dp" />
 
     </RelativeLayout>
