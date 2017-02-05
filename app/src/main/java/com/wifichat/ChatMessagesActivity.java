@@ -1,14 +1,18 @@
 package com.wifichat;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +20,14 @@ import android.widget.TextView;
 
 import com.wifichat.adapter.MessagesAdapter;
 import com.wifichat.data.MessagesContract;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class ChatMessagesActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -26,6 +38,7 @@ public class ChatMessagesActivity extends AppCompatActivity implements LoaderMan
     private RecyclerView recyclerView;
     private TextView emptyView;
     private WifiP2pDevice device;
+    private String messageContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +57,7 @@ public class ChatMessagesActivity extends AppCompatActivity implements LoaderMan
         chatSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                messageContent = chatMessage.getText().toString();
             }
         });
 
@@ -76,7 +89,7 @@ public class ChatMessagesActivity extends AppCompatActivity implements LoaderMan
         messagesAdapter.swapCursor(null);
     }
 
-    /*public class DataSendTask extends AsyncTask<Void,Void,String> {
+    public class DataSendTask extends AsyncTask<Void, Void, String> {
 
         private Context context;
         private TextView statusText;
@@ -93,18 +106,18 @@ public class ChatMessagesActivity extends AppCompatActivity implements LoaderMan
                 ServerSocket serverSocket = new ServerSocket(8888);
                 Socket client = serverSocket.accept();
                 InputStream inputstream = client.getInputStream();
-                sendText(inputstream, chatMessage.getText().toString());
+                sendText(inputstream, messageContent);
                 serverSocket.close();
-                return ;
+                return messageContent;
             } catch (IOException e) {
                 Log.e("ChatMessagesActivity", e.getMessage());
                 return null;
             }
         }
 
-        *//**
+        /**
          * Start activity that can handle the JPEG image
-         *//*
+         */
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
@@ -117,13 +130,11 @@ public class ChatMessagesActivity extends AppCompatActivity implements LoaderMan
     public boolean sendText(InputStream inputStream, String out) {
         byte buf[] = new byte[1024];
         int len;
-        long startTime=System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
 
         try {
             while ((len = inputStream.read(buf)) != -1) {
-                out.write(buf, 0, len);
             }
-            out.close();
             inputStream.close();
 
         } catch (IOException e) {
@@ -131,5 +142,5 @@ public class ChatMessagesActivity extends AppCompatActivity implements LoaderMan
             return false;
         }
         return true;
-    }*/
+    }
 }
