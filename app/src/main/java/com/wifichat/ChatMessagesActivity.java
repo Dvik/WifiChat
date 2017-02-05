@@ -1,5 +1,6 @@
 package com.wifichat;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.wifi.p2p.WifiP2pDevice;
@@ -58,6 +59,15 @@ public class ChatMessagesActivity extends AppCompatActivity implements LoaderMan
             @Override
             public void onClick(View view) {
                 messageContent = chatMessage.getText().toString();
+
+                ContentValues contentValues = new ContentValues();
+
+                contentValues.put(MessagesContract.MessagesEntry.COLUMN_MESSAGE, messageContent);
+                contentValues.put(MessagesContract.MessagesEntry.COLUMN_SENDER, device.deviceName);
+                getContentResolver().insert(MessagesContract.MessagesEntry.CONTENT_URI,
+                        contentValues);
+
+                new DataSendTask(ChatMessagesActivity.this).execute();
             }
         });
 
@@ -92,11 +102,9 @@ public class ChatMessagesActivity extends AppCompatActivity implements LoaderMan
     public class DataSendTask extends AsyncTask<Void, Void, String> {
 
         private Context context;
-        private TextView statusText;
 
-        public DataSendTask(Context context, View statusText) {
+        public DataSendTask(Context context) {
             this.context = context;
-            this.statusText = (TextView) statusText;
         }
 
         @Override
@@ -121,7 +129,6 @@ public class ChatMessagesActivity extends AppCompatActivity implements LoaderMan
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                statusText.setText("Text sent - " + result);
             }
         }
 

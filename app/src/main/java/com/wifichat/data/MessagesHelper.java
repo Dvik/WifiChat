@@ -26,10 +26,10 @@ public class MessagesHelper extends SQLiteOpenHelper {
                 MessagesContract.MessagesEntry.TABLE_MESSAGES + "(" +
                 MessagesContract.MessagesEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
                 MessagesContract.MessagesEntry.COLUMN_MESSAGE + " TEXT NOT NULL, " +
-                MessagesContract.MessagesEntry.COLUMN_SENDER + " TEXT NOT NULL, " +
-                MessagesContract.MessagesEntry.COLUMN_RECEIVER + " TEXT NOT NULL, " +
-                MessagesContract.MessagesEntry.COLUMN_TIME + " TEXT NOT NULL, " +
-                MessagesContract.MessagesEntry.COLUMN_STATUS + " TEXT NOT NULL);";
+                MessagesContract.MessagesEntry.COLUMN_SENDER + " TEXT , " +
+                MessagesContract.MessagesEntry.COLUMN_RECEIVER + " TEXT , " +
+                MessagesContract.MessagesEntry.COLUMN_TIME + " TEXT , " +
+                MessagesContract.MessagesEntry.COLUMN_STATUS + " TEXT );";
 
         sqLiteDatabase.execSQL(SQL_CREATE_MESSAGES_TABLE);
 
